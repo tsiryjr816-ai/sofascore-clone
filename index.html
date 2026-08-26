@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html lang="mg">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Match Center - Live & Calendrier</title>
+    <title>Match Center - En Direct & Calendrier</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <h1>⚽ Match Center</h1>
         <nav>
-            <button onclick="fetchLiveMatches()">Lalao Mivantana (Live)</button>
-            <button onclick="fetchAllMatches()">Kalandrie (Lasa & Ho avy)</button>
+            <button onclick="fetchLiveMatches()">En Direct (Live)</button>
+            <button onclick="fetchAllMatches()">Calendrier (Passés & À venir)</button>
         </nav>
     </header>
 
     <main>
-        <div id="loading" style="display: none;">Maka vaovao...</div>
-        <!-- Eto no hisehoan'ny valin'ny lalao na ny kalandrie -->
+        <div id="loading" style="display: none;">Chargement des données en cours...</div>
         <div id="match-container"></div>
     </main>
 
