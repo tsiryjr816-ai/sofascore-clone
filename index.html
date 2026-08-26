@@ -3,22 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Match Center - En Direct & Calendrier</title>
+    <title>Match Center - SofaScore Clone</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>⚽ Match Center</h1>
+        <div class="logo">⚽ Match Center</div>
         <nav>
-            <button onclick="fetchLiveMatches()">En Direct (Live)</button>
-            <button onclick="fetchAllMatches()">Calendrier (Passés & À venir)</button>
+            <button class="nav-btn active" id="btn-live" onclick="startLiveAutoRefresh()">En Direct (Live)</button>
+            <input type="date" id="date-picker" onchange="fetchMatchesByDate(this.value)">
         </nav>
     </header>
 
     <main>
-        <div id="loading" style="display: none;">Chargement des données en cours...</div>
-        <div id="match-container"></div>
+        <div id="loading" class="loading-spinner" style="display: none;">Chargement des matchs...</div>
+        <div id="match-container" class="match-list"></div>
     </main>
+
+    <!-- Modal pop-up ho an'ny statistiques -->
+    <div id="match-modal" class="modal" onclick="closeModal(event)">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModalDirect()">&times;</span>
+            <div id="modal-details">Chargement des détails...</div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
