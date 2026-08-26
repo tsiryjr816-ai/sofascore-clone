@@ -1,15 +1,14 @@
-// Apetraho eto ilay API Key anananao
-const API_KEY = 'APETRAHO_ETO_NY_API_KEY_ANAO'; 
-// Soloy arakaraka ny anaran'ilay API ny URL raha tsy API-Football izy ity
+// Insérez votre clé API ici
+const API_KEY = 'd4fd114af61e4e8d910f91b4ec86448e'; 
 const BASE_URL = 'https://v3.football.api-sports.io'; 
 
 const matchContainer = document.getElementById('match-container');
 const loading = document.getElementById('loading');
 
-// Fanaovana ny fangatahana (Fetch) amin'ny API
+// Récupération des données depuis l'API
 async function fetchFromAPI(endpoint) {
     loading.style.display = 'block';
-    matchContainer.innerHTML = ''; // Fafana izay lalao teo aloha
+    matchContainer.innerHTML = ''; // Réinitialiser l'affichage
     
     try {
         const response = await fetch(`${BASE_URL}${endpoint}`, {
@@ -22,29 +21,28 @@ async function fetchFromAPI(endpoint) {
         const data = await response.json();
         displayMatches(data.response);
     } catch (error) {
-        console.error('Nisy olana:', error);
-        matchContainer.innerHTML = '<p>Tsy nahazo données avy amin\'ny API.</p>';
+        console.error('Erreur :', error);
+        matchContainer.innerHTML = '<p>Impossible de charger les données depuis l\'API.</p>';
     } finally {
         loading.style.display = 'none';
     }
 }
 
-// Maka ny lalao mandeha mivantana (Live)
+// Récupérer les matchs en direct (Live)
 function fetchLiveMatches() {
     fetchFromAPI('/fixtures?live=all');
 }
 
-// Maka ny lalao rehetra anio (Kalandrie)
+// Récupérer tous les matchs du jour (Calendrier)
 function fetchAllMatches() {
-    // Afaka ovaina ny daty raha mila ny omaly na ny ampitso
-    const androany = new Date().toISOString().split('T')[0]; 
-    fetchFromAPI(`/fixtures?date=${androany}`);
+    const aujourdhui = new Date().toISOString().split('T')[0]; 
+    fetchFromAPI(`/fixtures?date=${aujourdhui}`);
 }
 
-// Asehoy eo amin'ny pejy ny lalao
+// Afficher les matchs sur la page
 function displayMatches(matches) {
     if (!matches || matches.length === 0) {
-        matchContainer.innerHTML = '<p>Tsy misy lalao hita.</p>';
+        matchContainer.innerHTML = '<p>Aucun match trouvé pour le moment.</p>';
         return;
     }
 
@@ -64,5 +62,5 @@ function displayMatches(matches) {
     });
 }
 
-// Alefa avy hatrany ny lalao mivantana rehefa misokatra ny pejy
+// Lancer la recherche des matchs en direct au chargement de la page
 window.onload = fetchLiveMatches;
